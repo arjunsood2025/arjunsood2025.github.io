@@ -1,9 +1,15 @@
 main:
-  - title: "Posts"
-    url: /posts/
-  - title: "Categories"
-    url: /categories/
-  - title: "Tags"
-    url: /tags/
-  - title: "About"
-    url: /about/
+  - title: "Home"
+    url: /
+  - title: "Experiences"
+    url: /experiences/
+  - title: "Project Portfolio"
+    url: /projects/
+  - title: "Skills"
+    url: /skills/
+  - title: "Coursework"
+    url: /coursework/
+  - title: "Resume"
+    url: /resume/
+  - title: "Contact Me"
+    url: /contact/
