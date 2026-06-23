@@ -3,27 +3,15 @@ permalink: /resume/
 title: "Resume"
 ---
 
-<!-- =============================================
-     RESUME
-     Option 1 (recommended): Upload your resume PDF
-       to assets/ and update the link below.
-     Option 2: Embed a Google Drive preview by
-       replacing the src URL in the iframe below.
-     ============================================= -->
+<a href="/assets/Arjun_Sood_Resume.pdf" download="Arjun_Sood_Resume.pdf" class="btn btn--primary btn--large">Download Resume</a>
 
-[Download Resume (PDF)](/assets/resume.pdf){: .btn .btn--primary .btn--large}
+<br><br>
 
----
-
-<!-- PDF embed preview — replace the src with your Google Drive embed link,
-     or remove this block if you prefer download-only. -->
-<!--
 <iframe
-  src="https://drive.google.com/file/d/YOUR_FILE_ID/preview"
+  src="/assets/Arjun_Sood_Resume.pdf"
   width="100%"
-  height="800px"
-  style="border: none;">
+  height="1000px"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+  <p>Your browser doesn't support PDF embedding.
+     <a href="/assets/Arjun_Sood_Resume.pdf">Download the PDF</a> instead.</p>
 </iframe>
--->
-
-*To update your resume: replace the file at `assets/resume.pdf` with your latest PDF.*
