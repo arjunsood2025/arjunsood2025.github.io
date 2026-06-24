@@ -1,15 +1,15 @@
 main:
-  - title: "Home"
-    url: /
+  - title: "About"
+    url: /#about
   - title: "Experiences"
-    url: /experiences/
+    url: /#experiences
+  - title: "Awards"
+    url: /#awards
   - title: "Project Portfolio"
-    url: /projects/
+    url: /#projects
   - title: "Skills"
-    url: /skills/
-  - title: "Coursework"
-    url: /coursework/
+    url: /#skills
   - title: "Resume"
-    url: /resume/
+    url: /#resume
   - title: "Contact Me"
-    url: /contact/
+    url: /#contact
