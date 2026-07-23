@@ -151,3 +151,4 @@ Built a linearizable distributed KV database from scratch (no DB/consensus/RPC l
 * **Computer Science:** 1st place in DVSF Computer Science Research (2025); 1st place in MCSRC Computer Science Research (2025); 1st place in PJAS 1B Computer Science Research (2025); Villanova University Award for Computer Science Research (2025)
 * **Engineering:** 1st place in PJAS 1B Engineering Research (2024); U.S. Air Force Special Award "For An Outstanding Science or Engineering Project" (2024); Germantown Academy "Excellence in AP Physics C" (2025); Germantown Academy "Greatest Perseverance in Math and Physics" (2025)
 * **General:** National Merit Special Corporate Scholarship (2025)
+
