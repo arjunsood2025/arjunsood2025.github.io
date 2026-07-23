@@ -3,6 +3,8 @@ main:
     url: /#about
   - title: "Experiences"
     url: /#experiences
+  - title: "Activities"
+    url: /#activities
   - title: "Awards"
     url: /#awards
   - title: "Project Portfolio"

@@ -16,50 +16,121 @@ author_profile: true
     border-top: 2px solid #ddd;
     margin: 2.5em 0 1.5em;
   }
+
+  /* Role subtitle line under each heading */
+  .meta { color: #666; margin-top: -0.4em; }
 </style>
 
 <!-- =============================================
      ABOUT ME
-     Edit the paragraphs below.
      ============================================= -->
 <div id="about" class="section">
   <h1>About Me</h1>
 
   <p>
     Hi! I'm <strong>Arjun Sood</strong>, a student at <strong>Georgia Institute of Technology</strong>
-    studying <strong>[PLACEHOLDER — your majors]</strong>.
+    pursuing a <strong>B.S. in Computer Science</strong> with concentrations in
+    <strong>Artificial Intelligence</strong> and <strong>Modeling &amp; Simulation</strong>
+    (expected May 2028, GPA 3.55/4.00).
     My primary interests are in developing AI for robotics, and I aim to apply my skills toward
     advancing intelligent, real-world systems.
   </p>
 
-  <p>[PLACEHOLDER — Add a second paragraph about your background, interests, or goals.]</p>
+  <p>
+    I currently do robotics research at Georgia Tech's <strong>RICAL Robotics Laboratory</strong>, where I
+    train reinforcement-learning locomotion and manipulation policies for Unitree quadrupeds and humanoids
+    in NVIDIA Isaac Lab and build wheeled-mobility hardware for legged platforms. Previously I was a software
+    engineering intern at <strong>Color Robotics</strong> and an AI/ML researcher at the
+    <strong>University of Pennsylvania's ASSET Lab</strong>, working on LLM training, compression, and video
+    foundation models. Outside of research I compete with <strong>RoboJackets RoboCup</strong> and build
+    systems-heavy side projects spanning vision-language-action models, distributed databases, and
+    high-performance inference engines.
+  </p>
 </div>
 
 <hr class="section-divider">
 
 <!-- =============================================
      EXPERIENCES
-     Copy the block below for each experience.
      ============================================= -->
 <div id="experiences" class="section">
   <h1>Experiences</h1>
 
-  <h2>[Job Title] — [Company Name]</h2>
-  <p><strong>[Month Year] – [Month Year or Present]</strong> | [City, State or Remote]</p>
+  <h2>Robotics Engineer &amp; Researcher — Georgia Tech RICAL Robotics Laboratory</h2>
+  <p class="meta"><strong>August 2025 – Present</strong> | Atlanta, GA</p>
   <ul>
-    <li>[Bullet point describing a key responsibility or achievement]</li>
-    <li>[Bullet point describing a key responsibility or achievement]</li>
-    <li>[Bullet point describing a key responsibility or achievement]</li>
+    <li>Developed reinforcement-learning training pipelines in NVIDIA Isaac Lab for Unitree Go2 locomotion across simulated construction-site terrain, using reward shaping, hyperparameter tuning, and curriculum learning across 4,096 GPU-parallel environments, 17 reward terms, and 5 terrain classes to improve rough-terrain success from ~62% to 89%.</li>
+    <li>Trained Unitree H1-2 humanoid policies for object pickup, transport, and placement, designing task-specific reward functions and staged curricula for a 3-stage manipulation workflow across 6 object and environment configurations.</li>
+    <li>Replicated 2 robot simulation environments in MuJoCo to support cross-simulator validation and future sim-to-real deployment, while investigating contact-force constraints and wheel-module motor and material requirements across 3 candidate configurations.</li>
+    <li>Developed an environment-adaptive BLE beacon placement algorithm that parses floor-plan geometry, room connectivity, signal-blocking obstacles, and task zones to generate zone-specific deployment layouts across 5 environment classifications.</li>
+    <li>Applied simulated annealing over ~10,000 candidate layout perturbations per run to optimize beacon locations using a 5-term weighted objective for zone and path coverage, adjacent-zone separation, non-line-of-sight penalties, and infrastructure cost.</li>
+    <li>Designed placement rules for 5 environment types — warehouses, corridors, partitioned rooms, restricted areas, and metal-obstructed zones — with variable beacon densities and 2 mounting-height strategies to improve indoor worker localization.</li>
+    <li>Designing and prototyping a 4-wheel drive module using Arduino Mega and Dynamixel Shield, plus a custom RemoteXY wireless controller for real-time control of 4 wheel actuators.</li>
+    <li>Creating a reusable ROS 2 package with ~3 modular nodes for command input, wheel control, and system telemetry, and physically integrating the drive system with an existing quadruped platform across ~3 wheel-assisted gait behaviors.</li>
+    <li>Implementing computer vision for obstacle detection and autonomous path planning across 10+ simulated obstacle and terrain configurations, documented in ~25 pages of technical documentation for reproducibility.</li>
   </ul>
 
   <hr class="section-divider">
 
-  <h2>[Job Title] — [Company Name]</h2>
-  <p><strong>[Month Year] – [Month Year]</strong> | [City, State or Remote]</p>
+  <h2>Software Engineering Intern — Color Robotics</h2>
+  <p class="meta"><strong>March 2025 – October 2025</strong> | San Francisco, CA</p>
   <ul>
-    <li>[Bullet point describing a key responsibility or achievement]</li>
-    <li>[Bullet point describing a key responsibility or achievement]</li>
-    <li>[Bullet point describing a key responsibility or achievement]</li>
+    <li>Designed and implemented an AI-powered diagnostic agent system using LLMs, retrieval-augmented generation (RAG), and knowledge-graph techniques supporting a 5-stage diagnostic workflow that analyzes machine issues, synthesizes maintenance data, recommends solutions, guides users interactively, and generates resolution reports.</li>
+    <li>Developed webpages and components in HTML, CSS, React, Python, and Django for a robot monitoring platform surfacing 12+ categories of live backend data on robot performance, metrics, errors, and deployments.</li>
+  </ul>
+
+  <hr class="section-divider">
+
+  <h2>AI/ML Engineer &amp; Researcher — University of Pennsylvania ASSET Laboratory</h2>
+  <p class="meta"><strong>June 2024 – August 2025</strong> | Philadelphia, PA</p>
+  <ul>
+    <li>Collaborated with PhD students and undergraduates on 3 AI research projects on LLMs and video foundation models with Professor Mayur Naik.</li>
+    <li>Co-led a project training an LLM in PyTorch with Group Relative Policy Optimization to generate Python scripts that search medical databases and predict patient outcomes under 2 treatment conditions.</li>
+    <li>Researched and implemented a new selective LLM fine-tuning and quantization technique in PyTorch, reaching within ~2 percentage points of full fine-tuning performance while reducing non-zero bits by 50%.</li>
+    <li>Proposed ~6 techniques to make a video foundation model's object-action detection system more computationally efficient.</li>
+    <li>Developed a prompting interface with ~6 configurable input and control elements for ML engineers to guide video foundation model training, using HTML, CSS, React, and Figma.</li>
+  </ul>
+
+  <hr class="section-divider">
+
+  <h2>Traffic Engineering &amp; Web Development Intern — Drive Engineering</h2>
+  <p class="meta"><strong>April 2024 – May 2024</strong> | Lansdale, PA</p>
+  <ul>
+    <li>Reoptimized traffic light timing systems by modeling and simulating ~4 intersections in Synchro 11.</li>
+    <li>Improved highway monitoring systems by repositioning ~8 CCTV cameras for optimal coverage.</li>
+    <li>Redesigned ~7 webpages in Wix to improve the usability of Drive Engineering's website.</li>
+    <li>Facilitated communication between engineers and clients by producing 10+ project reports.</li>
+  </ul>
+</div>
+
+<hr class="section-divider">
+
+<!-- =============================================
+     ACTIVITIES
+     ============================================= -->
+<div id="activities" class="section">
+  <h1>Activities</h1>
+
+  <h2>Electrical &amp; Software Subteam Engineer — RoboJackets RoboCup</h2>
+  <p class="meta"><strong>August 2025 – Present</strong> | Georgia Tech, Atlanta, GA</p>
+  <ul>
+    <li>Develops the C++/ROS 2 autonomy stack for a six-robot soccer team across 7 major subsystems: computer vision, state estimation, multi-agent strategy, path planning, motion control, simulation, and wireless robot communication.</li>
+    <li>Receiving hands-on training in PCB design, circuit analysis, and power system fundamentals for competitive autonomous robots.</li>
+    <li>Selecting and integrating 4 major categories of electrical components — batteries, motor drivers, microcontrollers, and sensors — with soldering, board assembly, and safe handling of high-voltage kicker circuits.</li>
+    <li>Developing embedded firmware skills across SPI, I²C, and serial communication, using multimeters and oscilloscopes for diagnostics.</li>
+    <li>Building foundational knowledge in wireless communication protocols and robot power distribution to support collaboration across the mechanical, electrical, and software teams.</li>
+  </ul>
+
+  <hr class="section-divider">
+
+  <h2>AI/ML Engineer &amp; Researcher — AI @ GT Applied Research Project Team</h2>
+  <p class="meta"><strong>August 2025 – Present</strong> | Georgia Tech, Atlanta, GA</p>
+  <ul>
+    <li>Collaborating with 1 PhD student and ~5 undergraduates on lifelong learning frameworks for autonomous household robots, enabling continual skill acquisition and adaptation in open-ended environments.</li>
+    <li>Ran baseline experiments with ~3 existing Vision-Language-Action models across 10 household tasks on humanoid robot task performance.</li>
+    <li>Implementing a 3-component dual-process cognitive architecture combining fast reactive neural policies (System 1) with LLM-powered deliberative reasoning (System 2), coordinated by a metacognitive arbitrator that switches on uncertainty and task novelty.</li>
+    <li>Designing a meta-learning loop for agents to self-assess performance, rehearse skills, and prioritize learning by utility, frequency, and confidence decay.</li>
+    <li>Running simulation experiments in the SAPIEN simulator across ~5 environmental variation levels, 8 appliance types, and 12 multi-step tasks, tracking Forward Transfer Efficiency, Catastrophic Forgetting Index, and Autonomy Index.</li>
   </ul>
 </div>
 
@@ -67,104 +138,202 @@ author_profile: true
 
 <!-- =============================================
      AWARDS
-     Copy the block below for each award.
      ============================================= -->
 <div id="awards" class="section">
   <h1>Awards</h1>
 
-  <h2>[Award Name]</h2>
-  <p><strong>[Awarding Organization]</strong> | [Month Year]</p>
-  <p>[Brief description of the award and what you did to earn it.]</p>
+  <h2>Computer Science Research</h2>
+  <ul>
+    <li><strong>1st Place</strong> — Delaware Valley Science Fair (DVSF), Computer Science Research | 2025</li>
+    <li><strong>1st Place</strong> — Montgomery County Science Research Competition (MCSRC), Computer Science Research | 2025</li>
+    <li><strong>1st Place</strong> — Pennsylvania Junior Academy of Science (PJAS), Region 1B Computer Science Research | 2025</li>
+    <li><strong>Villanova University Award</strong> for Computer Science Research | 2025</li>
+  </ul>
 
   <hr class="section-divider">
 
-  <h2>[Award Name]</h2>
-  <p><strong>[Awarding Organization]</strong> | [Month Year]</p>
-  <p>[Brief description of the award and what you did to earn it.]</p>
+  <h2>Engineering &amp; Physics</h2>
+  <ul>
+    <li><strong>1st Place</strong> — Pennsylvania Junior Academy of Science (PJAS), Region 1B Engineering Research | 2024</li>
+    <li><strong>U.S. Air Force Special Award</strong> — "For An Outstanding Science or Engineering Project" | 2024</li>
+    <li><strong>Excellence in AP Physics C</strong> — Germantown Academy | 2025</li>
+    <li><strong>Greatest Perseverance in Math and Physics</strong> — Germantown Academy | 2025</li>
+  </ul>
+
+  <hr class="section-divider">
+
+  <h2>General</h2>
+  <ul>
+    <li><strong>National Merit Special Corporate Scholarship</strong> | 2025</li>
+  </ul>
 </div>
 
 <hr class="section-divider">
 
 <!-- =============================================
      PROJECT PORTFOLIO
-     Copy the block below for each project.
      ============================================= -->
 <div id="projects" class="section">
   <h1>Project Portfolio</h1>
 
-  <h2>[Project Name]</h2>
-  <p><strong>Technologies:</strong> [e.g., Python, ROS, PyTorch]</p>
-  <p>[One or two sentences describing what the project does and what problem it solves.]</p>
+  <h2>Language-Conditioned Vision-Language-Action Robot Manipulation</h2>
+  <p><strong>Technologies:</strong> PyTorch, Hugging Face LeRobot, OpenVLA, SmolVLA, ACT, LoRA/QLoRA, SO-101 arm, WebSockets, msgpack</p>
+  <p>An end-to-end language-conditioned Vision-Language-Action manipulation system spanning teleoperated data collection, dataset curation, policy training, real-time control, and evaluation on a physical robot arm.</p>
   <ul>
-    <li>[Key feature or result]</li>
-    <li>[Key feature or result]</li>
+    <li>Trained and benchmarked a four-model ladder — from-scratch behavior cloning, ACT, SmolVLA, and a LoRA/QLoRA fine-tune of the 7B-parameter OpenVLA — on 800 demonstrations across 8 tabletop tasks, improving held-out success from 34% to 76%.</li>
+    <li>Designed a reproducible evaluation suite (Wilson 95% CIs over 20 trials/condition) measuring paraphrase generalization, unseen-position and distractor robustness, and inference latency across 640 held-out trials.</li>
+    <li>Engineered an async policy-inference server and 30 Hz robot client with a hard safety filter — joint/velocity clamps, forward-kinematics workspace bounds, gripper-current cap, and e-stop — enforcing zero unsafe motor commands.</li>
+    <li>Delivered a reproducible research stack: fixed seeds, version-controlled YAML configs, Hub-versioned datasets, 47 hardware-free tests covering the full control loop, and a paper-style report with ablations and failure analysis.</li>
   </ul>
-  <a href="https://github.com/arjunsood2025/YOUR_REPO" class="btn btn--primary">GitHub Repo</a>
+  <a href="https://github.com/arjunsood2025" class="btn btn--primary">GitHub Repo</a>
 
   <hr class="section-divider">
 
-  <h2>[Project Name]</h2>
-  <p><strong>Technologies:</strong> [e.g., C++, OpenCV, TensorFlow]</p>
-  <p>[One or two sentences describing what the project does and what problem it solves.]</p>
+  <h2>Reinforcement Learning for Robust Quadruped Locomotion</h2>
+  <p><strong>Technologies:</strong> NVIDIA Isaac Lab, PPO, PyTorch, CNNs, ROS 2, C++ libtorch, TorchScript, ONNX</p>
+  <p>Robust sim-to-real locomotion policies for the Unitree Go2, trained with PPO across 4,096 GPU-parallel environments using a 17-term shaped reward, a procedural terrain curriculum, and full domain randomization over mass, friction, motor strength, sensor noise, and actuation latency.</p>
   <ul>
-    <li>[Key feature or result]</li>
-    <li>[Key feature or result]</li>
+    <li>Built an end-to-end vision-based controller: 64×64 egocentric depth images encoded by a custom CNN and fused with proprioception in an asymmetric actor-critic, traversing stairs, slopes, and gaps without privileged height maps.</li>
+    <li>Engineered an evaluation harness over 100-episode suites measuring success/fall rate, velocity-tracking error, cost of transport, and push recovery; improved rough-terrain success from 62% → 89%.</li>
+    <li>Validated every reward and randomization component via controlled ablations (fixed-seed retraining per term), documenting failure modes such as foot-skating, twitching, and high-torque gaits.</li>
+    <li>Exported policies to TorchScript/ONNX with numerical parity verification and shipped a ROS 2 inference node plus a C++ libtorch 50 Hz control loop with safety clamps, watchdogs, and sub-millisecond p95 latency against a 20 ms budget.</li>
   </ul>
-  <a href="https://github.com/arjunsood2025/YOUR_REPO" class="btn btn--primary">GitHub Repo</a>
+  <a href="https://github.com/arjunsood2025" class="btn btn--primary">GitHub Repo</a>
 
   <hr class="section-divider">
 
-  <h2>[Project Name]</h2>
-  <p><strong>Technologies:</strong> [e.g., React, Node.js, PostgreSQL]</p>
-  <p>[One or two sentences describing what the project does and what problem it solves.]</p>
+  <h2>Quant Research Platform &amp; C++ Event-Driven Backtesting Engine</h2>
+  <p><strong>Technologies:</strong> C++20, pybind11, DuckDB, Parquet, FastAPI, Streamlit, SQLite, Docker, GitHub Actions</p>
+  <p>A market-data research platform ingesting exchange L2 order-book and trade feeds into hive-partitioned Parquet with schema validation and sequence-gap detection, with DuckDB SQL achieving 18× faster range queries than a pandas baseline via partition pruning and predicate pushdown.</p>
   <ul>
-    <li>[Key feature or result]</li>
-    <li>[Key feature or result]</li>
+    <li>Wrote a C++20 limit-order-book replay engine with zero-copy pybind11/NumPy bindings (GIL released in the hot loop), processing 15M events/sec — 30× the pure-Python reference — with bit-identical cross-language parity enforced in CI.</li>
+    <li>Developed an event-driven backtester simulating order latency, book-walking market impact, maker/taker fees, and L2 queue-position approximation, with portfolio accounting identities verified by property-style tests.</li>
+    <li>Implemented leakage-safe evaluation: walk-forward and purged K-fold splits, train-only hyperparameter tuning, stationary-bootstrap Sharpe confidence intervals, and automated lookahead detection that fails CI on contaminated features.</li>
+    <li>Shipped production tooling around the research core: FastAPI experiment service, SQLite run registry, Streamlit dashboard, seeded synthetic market simulator, 60+ tests, CI, and multi-stage Docker builds.</li>
   </ul>
-  <a href="https://github.com/arjunsood2025/YOUR_REPO" class="btn btn--primary">GitHub Repo</a>
+  <a href="https://github.com/arjunsood2025" class="btn btn--primary">GitHub Repo</a>
+
+  <hr class="section-divider">
+
+  <h2>Time-Series ML Platform with Distributed Training and Inference</h2>
+  <p><strong>Technologies:</strong> PyTorch, Transformers, TCNs, DDP/torchrun, FastAPI, Prometheus, pytest</p>
+  <p>A config-driven training system (Transformer + TCN with multi-horizon heads, focal loss, mixed precision, gradient accumulation, DDP, checkpointing, early stopping) for 3-class return-direction and volatility prediction on noisy simulated limit-order-book data.</p>
+  <ul>
+    <li>Engineered a causal microstructure feature store (order-flow imbalance, book imbalance, realized volatility, rolling z-scores) with machine-checked no-lookahead guarantees via a truncation-invariance test.</li>
+    <li>Designed a leakage-safe evaluation suite — purged/embargoed walk-forward splits, shuffled-label sanity tests, regime-sliced metrics, calibration error, and transaction-cost stress tests reporting where the signal's Sharpe crosses zero.</li>
+    <li>Benchmarked deep models against logistic-regression, GBDT, and naive-rule baselines across 4 market regimes; causality unit tests caught a real bug where TCN normalization leaked future information across the time axis.</li>
+    <li>Deployed a versioned model registry with atomic promotion behind a FastAPI service with Prometheus histograms, measuring ~1.5 ms p50 single-window CPU latency and ~4.1k windows/s batch throughput; 43 pytest tests cover data, models, evaluation, and API.</li>
+  </ul>
+  <a href="https://github.com/arjunsood2025" class="btn btn--primary">GitHub Repo</a>
+
+  <hr class="section-divider">
+
+  <h2>LLM Pretraining, Post-Training, and High-Performance Inference Engine</h2>
+  <p><strong>Technologies:</strong> PyTorch, Triton, FSDP2/DDP, DPO, lm-eval-harness, CUDA/A100, Docker</p>
+  <p>An end-to-end LLM platform: a from-scratch BPE tokenizer, a LLaMA-style transformer (RoPE/GQA/SwiGLU), and distributed pretraining of 125M-parameter models on 2.5B tokens with bf16 and custom Triton kernels, reaching 36% MFU on A100s with bitwise-deterministic checkpoint resume.</p>
+  <ul>
+    <li>Ran a 9-run scaling study fitting compute–loss power laws against Chinchilla predictions, with matched-compute architecture ablations (RoPE, SwiGLU, GQA) and a MinHash-deduped, contamination-filtered data pipeline over memory-mapped shards.</li>
+    <li>Post-trained via SFT (loss masking, sequence packing) and a from-scratch DPO implementation, evaluated with lm-eval-harness (HellaSwag, ARC, PIQA, WinoGrande, MMLU) and position-debiased LLM-judge win rates with bootstrap CIs.</li>
+    <li>Engineered a vLLM-style inference engine: paged KV cache with prefix caching and copy-on-write, continuous batching with preemption, speculative decoding (1.8× decode speedup at 72% acceptance), and int8 weight-only quantization — serving 18,000 tok/s at 42 ms p99 TTFT under Poisson load.</li>
+    <li>Shipped with 65+ CI unit tests (logit parity, paged-vs-dense attention equivalence, kernel correctness), Docker packaging, a model card, and a benchmark report against Hugging Face and vLLM baselines.</li>
+  </ul>
+  <a href="https://github.com/arjunsood2025" class="btn btn--primary">GitHub Repo</a>
+
+  <hr class="section-divider">
+
+  <h2>Raft-Replicated Key-Value Store with From-Scratch LSM Engine</h2>
+  <p><strong>Technologies:</strong> Rust, Tokio, Raft, LSM Trees, Deterministic Simulation Testing</p>
+  <p>A linearizable distributed KV database built from scratch with no database, consensus, or RPC libraries: an LSM-tree storage engine (CRC-framed WAL with torn-write recovery, bloom-filtered SSTables, leveled compaction, MVCC snapshots) under a full Raft implementation with pre-vote elections, pipelined replication, InstallSnapshot, membership changes, and ReadIndex.</p>
+  <ul>
+    <li>Engineered a FoundationDB-style deterministic simulator running the entire cluster on virtual time with seeded fault injection and exact seed replay — executing 11,000+ failure schedules (~230M events) against a from-scratch Wing-Gong linearizability checker.</li>
+    <li>Caught and documented 6 real bugs pre-release with reproducing seeds preserved as CI regressions, including a snapshot-transfer wedge requiring four rare failures to align — invisible to unit tests and live chaos testing alike.</li>
+    <li>Shipped the production layer: a Tokio server with a single-owner event loop, group commit (3.4× write throughput), exactly-once client sessions via replicated dedup, and three read-consistency modes at 0.55 / 0.94 / 10 ms p50 on a 3-node cluster.</li>
+    <li>Measured failure behavior honestly: sub-second leader election under 300,000-op load with zero lost operations, with client-observed failover decomposed into election vs. rediscovery via a purpose-built YCSB-style benchmark suite.</li>
+  </ul>
+  <a href="https://github.com/arjunsood2025" class="btn btn--primary">GitHub Repo</a>
 </div>
 
 <hr class="section-divider">
 
 <!-- =============================================
      SKILLS
-     Add or remove items from each category.
      ============================================= -->
 <div id="skills" class="section">
   <h1>Skills</h1>
 
   <h2>Programming Languages</h2>
   <ul>
-    <li>[e.g., Python]</li>
-    <li>[e.g., C / C++]</li>
-    <li>[e.g., Java]</li>
-    <li>[e.g., MATLAB]</li>
-    <li>[PLACEHOLDER — add more]</li>
+    <li>Python</li>
+    <li>C / C++</li>
+    <li>Rust</li>
+    <li>Java</li>
+    <li>SQL</li>
+    <li>Bash</li>
+    <li>MATLAB</li>
+    <li>JavaScript</li>
+    <li>HTML / CSS</li>
   </ul>
 
-  <h2>Frameworks &amp; Libraries</h2>
+  <h2>Machine Learning &amp; AI</h2>
   <ul>
-    <li>[e.g., PyTorch]</li>
-    <li>[e.g., TensorFlow]</li>
-    <li>[e.g., ROS / ROS 2]</li>
-    <li>[e.g., NumPy / SciPy]</li>
-    <li>[PLACEHOLDER — add more]</li>
+    <li>PyTorch, Hugging Face Transformers, LeRobot</li>
+    <li>Reinforcement Learning, PPO, Reward Shaping, Curriculum Learning</li>
+    <li>Behavior Cloning, ACT, OpenVLA, SmolVLA</li>
+    <li>LoRA / QLoRA, SFT, DPO, Quantization</li>
+    <li>CNNs, Transformers, Domain Randomization, Sim-to-Real Transfer</li>
+    <li>Mixed-Precision Training, DDP, FSDP2, Triton</li>
   </ul>
 
-  <h2>Tools &amp; Platforms</h2>
+  <h2>Robotics &amp; Simulation</h2>
   <ul>
-    <li>[e.g., Git / GitHub]</li>
-    <li>[e.g., Linux]</li>
-    <li>[e.g., Docker]</li>
-    <li>[PLACEHOLDER — add more]</li>
+    <li>NVIDIA Isaac Lab, MuJoCo, Gazebo, RViz, SAPIEN</li>
+    <li>ROS 2, TorchScript, ONNX</li>
+    <li>Unitree Go2 / H1-2, SO-101 Arm</li>
+    <li>Vision-Based Control, Robot Manipulation, Quadruped Locomotion</li>
+    <li>Path Planning (A*, RRT), SLAM, PID Control, Kalman / Particle Filtering</li>
+    <li>Contact-Force Management</li>
   </ul>
 
-  <h2>Other Skills</h2>
+  <h2>Systems &amp; Distributed Computing</h2>
   <ul>
-    <li>[e.g., Machine Learning]</li>
-    <li>[e.g., Computer Vision]</li>
-    <li>[e.g., Embedded Systems]</li>
-    <li>[PLACEHOLDER — add more]</li>
+    <li>Raft Consensus, LSM Trees, WAL / SSTables, MVCC, Bloom Filters</li>
+    <li>Deterministic Simulation, Linearizability Testing</li>
+    <li>Async Programming, Tokio, Multithreading, Real-Time Control</li>
+    <li>pybind11, Zero-Copy NumPy Integration</li>
+    <li>WebSockets, MessagePack</li>
+  </ul>
+
+  <h2>Data, Quant &amp; Model Infrastructure</h2>
+  <ul>
+    <li>NumPy, Pandas, Parquet, DuckDB, SQLite</li>
+    <li>L2 Order Books, Market Microstructure Features, Event-Driven Backtesting</li>
+    <li>Walk-Forward Evaluation, Purged Cross-Validation</li>
+    <li>FastAPI, Streamlit, Prometheus</li>
+    <li>Model Serving, Model Registries</li>
+  </ul>
+
+  <h2>Development &amp; Infrastructure</h2>
+  <ul>
+    <li>Git, Linux, Docker</li>
+    <li>GitHub Actions, CI/CD</li>
+    <li>pytest, YAML, Conda, CMake</li>
+    <li>REST APIs</li>
+  </ul>
+
+  <h2>Embedded Systems &amp; Hardware</h2>
+  <ul>
+    <li>Arduino and Microcontroller SDKs, Embedded C/C++</li>
+    <li>SPI, I²C, UART, LoRa / FSK</li>
+    <li>Dynamixel, Motor Drivers, Sensor Integration</li>
+    <li>PCB Design, Power Distribution, Soldering</li>
+    <li>Oscilloscope / Multimeter Debugging</li>
+  </ul>
+
+  <h2>CAD &amp; Design</h2>
+  <ul>
+    <li>Altium Designer, KiCad</li>
+    <li>AutoCAD, Blender</li>
+    <li>Mechanical Assembly and Robotics Connectorization</li>
   </ul>
 </div>
 
@@ -195,14 +364,16 @@ author_profile: true
 
 <!-- =============================================
      CONTACT
-     Fill in your actual info below.
      ============================================= -->
 <div id="contact" class="section">
   <h1>Contact Me</h1>
 
   <p>Feel free to reach out — I'm always open to new opportunities, collaborations, or just a conversation!</p>
 
-  <p><strong>Phone:</strong> [PLACEHOLDER — e.g., (XXX) XXX-XXXX]</p>
+  <p><strong>Location:</strong> Atlanta, GA</p>
+  <p><strong>Phone:</strong> <a href="tel:+12679035103">+1 (267) 903-5103</a></p>
   <p><strong>GT Email:</strong> <a href="mailto:asood74@gatech.edu">asood74@gatech.edu</a></p>
   <p><strong>Personal Email:</strong> <a href="mailto:yourpersonalemail@example.com">[PLACEHOLDER — yourpersonalemail@example.com]</a></p>
+  <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/arjun-sood-0a0a38285/">linkedin.com/in/arjun-sood</a></p>
+  <p><strong>GitHub:</strong> <a href="https://github.com/arjunsood2025">github.com/arjunsood2025</a></p>
 </div>

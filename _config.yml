@@ -2,7 +2,8 @@
 title: "Arjun Sood"
 email: "asood74@gatech.edu"
 description: >-
-  XXXXXXXXX student at Georgia Tech, passionate about AI for robotics and intelligent real-world systems.
+  Computer Science student at Georgia Tech concentrating in AI and Modeling & Simulation,
+  passionate about AI for robotics and intelligent real-world systems.
 
 minimal_mistakes_skin: default
 search: false
@@ -31,8 +32,8 @@ plugins:
 author:
   name   : "Arjun Sood"
   avatar : "/assets/images/profile-photo.jpg"   # Replace with your actual photo filename
-  bio    : "XXXXXXXXXXXXXXXXX @ Georgia Tech"
-  location: "Philadelphia, PA"                        # Your city/state
+  bio    : "CS @ Georgia Tech — AI for Robotics"
+  location: "Atlanta, GA"
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
@@ -51,7 +52,7 @@ footer:
       url: "https://github.com/arjunsood2025"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://linkedin.com/in/YOUR_LINKEDIN_HANDLE"
+      url: "https://www.linkedin.com/in/arjun-sood-0a0a38285/"
 
 defaults:
   - scope:
