@@ -7,9 +7,9 @@ main:
     url: /#projects
   - title: "Skills"
     url: /#skills
-  - title: "Resume"
-    url: /#resume
   - title: "Coursework"
     url: /#coursework
+  - title: "Resume"
+    url: /#resume
   - title: "Contact Me"
     url: /#contact
