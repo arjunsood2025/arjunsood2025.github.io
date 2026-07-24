@@ -32,8 +32,8 @@ plugins:
 author:
   name   : "Arjun Sood"
   avatar : "/assets/images/profile-photo.jpg"   # Replace with your actual photo filename
-  bio    : "CS @ Georgia Tech — AI for Robotics"
-  location: "Atlanta, GA"
+  bio    : "CS @ Georgia Tech"
+  location: "Philadelphia, PA"
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"

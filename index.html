@@ -32,8 +32,10 @@ author_profile: true
     pursuing a <strong>B.S. in Computer Science</strong> with concentrations in
     <strong>Artificial Intelligence</strong> and <strong>Modeling &amp; Simulation</strong>
     (expected May 2028).
-    My primary interests are in developing AI for robotics, and I aim to apply my skills toward
-    advancing intelligent, real-world systems.
+    My primary interests are in AI for Robotics, along with the systems and infrastructure that make modern
+    AI work at scale — large language model training and high-performance inference, distributed systems and
+    databases, and low-latency data and compute platforms. I aim to apply these skills toward building
+    intelligent, real-world systems.
   </p>
 
   <p>
@@ -42,10 +44,35 @@ author_profile: true
     in NVIDIA Isaac Lab and build wheeled-mobility hardware for legged platforms. Previously I was a software
     engineering intern at <strong>Color Robotics</strong> and an AI/ML researcher at the
     <strong>University of Pennsylvania's ASSET Lab</strong>, working on LLM training, compression, and video
-    foundation models. Outside of research I compete with <strong>RoboJackets RoboCup</strong> and build
-    systems-heavy side projects spanning vision-language-action models, distributed databases, and
-    high-performance inference engines.
+    foundation models. Outside of my main research I build the C++/ROS 2 autonomy stack for
+    <strong>RoboJackets RoboCup</strong> and research lifelong learning for household robots with
+    <strong>AI @ GT</strong>, alongside systems-heavy side projects spanning vision-language-action models,
+    distributed databases, and high-performance inference engines.
   </p>
+</div>
+
+<hr class="section-divider">
+
+<!-- =============================================
+     COURSEWORK
+     Add your courses to the list below.
+     ============================================= -->
+<div id="coursework" class="section">
+  <h1>Relevant Coursework</h1>
+  <ul>
+    <li>CS 1332: Data Structures and Algorithms</li>
+    <li>CS 2110: Computer Organization & Programming</li>
+    <li>CS 2340: Objects & Design</li>
+    <li>CS 1301: Introduction to Computing</li>
+    <li>CS 1331: Introduction to Object-Oriented Programming</li>
+    <li>CS 2050: Discrete Mathematics for Computer Science</li>
+    <li>MATH/CS 2740: Foundations of Mathematics & Computing</li>
+    <li>MATH 1554: Linear Algebra</li>
+    <li>MATH 2551: Multivariable Calculus</li>
+    <li>MATH 2552: Differential Equations</li>
+    <li>PHYS 2212: Principles of Physics II Electricity & Magnetism</li>
+    <li>ECE 2040: Circuit Analysis</li>
+  </ul>
 </div>
 
 <hr class="section-divider">
@@ -62,11 +89,8 @@ author_profile: true
     <li>Developed reinforcement-learning training pipelines in NVIDIA Isaac Lab for Unitree Go2 locomotion across simulated construction-site terrain, using reward shaping, hyperparameter tuning, and curriculum learning across 4,096 GPU-parallel environments, 17 reward terms, and 5 terrain classes to improve rough-terrain success from ~62% to 89%.</li>
     <li>Trained Unitree H1-2 humanoid policies for object pickup, transport, and placement, designing task-specific reward functions and staged curricula for a 3-stage manipulation workflow across 6 object and environment configurations.</li>
     <li>Replicated 2 robot simulation environments in MuJoCo to support cross-simulator validation and future sim-to-real deployment, while investigating contact-force constraints and wheel-module motor and material requirements across 3 candidate configurations.</li>
-    <li>Developed an environment-adaptive BLE beacon placement algorithm that parses floor-plan geometry, room connectivity, signal-blocking obstacles, and task zones to generate zone-specific deployment layouts across 5 environment classifications.</li>
-    <li>Applied simulated annealing over ~10,000 candidate layout perturbations per run to optimize beacon locations using a 5-term weighted objective for zone and path coverage, adjacent-zone separation, non-line-of-sight penalties, and infrastructure cost.</li>
-    <li>Designed placement rules for 5 environment types — warehouses, corridors, partitioned rooms, restricted areas, and metal-obstructed zones — with variable beacon densities and 2 mounting-height strategies to improve indoor worker localization.</li>
-    <li>Designing and prototyping a 4-wheel drive module using Arduino Mega and Dynamixel Shield, plus a custom RemoteXY wireless controller for real-time control of 4 wheel actuators.</li>
-    <li>Creating a reusable ROS 2 package with ~3 modular nodes for command input, wheel control, and system telemetry, and physically integrating the drive system with an existing quadruped platform across ~3 wheel-assisted gait behaviors.</li>
+    <li>Built an environment-adaptive BLE beacon placement system for indoor worker localization: parsing floor-plan geometry, room connectivity, signal-blocking obstacles, and task zones, then applying simulated annealing over ~10,000 candidate layouts against a 5-term weighted objective (zone/path coverage, adjacent-zone separation, non-line-of-sight penalties, infrastructure cost) with placement rules across 5 environment types — warehouses, corridors, partitioned rooms, restricted areas, and metal-obstructed zones.</li>
+    <li>Designing and prototyping a 4-wheel drive module (Arduino Mega, Dynamixel Shield) with a custom RemoteXY wireless controller for real-time control of 4 wheel actuators, packaged as a reusable ROS 2 package (~3 modular nodes for command input, wheel control, and telemetry) and physically integrated with an existing quadruped platform across ~3 wheel-assisted gait behaviors.</li>
     <li>Implementing computer vision for obstacle detection and autonomous path planning across 10+ simulated obstacle and terrain configurations, documented in ~25 pages of technical documentation for reproducibility.</li>
   </ul>
 
@@ -126,11 +150,11 @@ author_profile: true
   <h2>AI/ML Engineer &amp; Researcher — AI @ GT Applied Research Project Team</h2>
   <p class="meta"><strong>August 2025 – Present</strong> | Georgia Tech, Atlanta, GA</p>
   <ul>
-    <li>Collaborating with 1 PhD student and ~5 undergraduates on lifelong learning frameworks for autonomous household robots, enabling continual skill acquisition and adaptation in open-ended environments.</li>
-    <li>Ran baseline experiments with ~3 existing Vision-Language-Action models across 10 household tasks on humanoid robot task performance.</li>
+    <li>Collaborating with 1 PhD student and 5 undergraduates on lifelong learning frameworks for autonomous household robots, enabling continual skill acquisition and adaptation in open-ended environments.</li>
+    <li>Ran baseline experiments with 3 existing Vision-Language-Action models across 10 household tasks on humanoid robot task performance.</li>
     <li>Implementing a 3-component dual-process cognitive architecture combining fast reactive neural policies (System 1) with LLM-powered deliberative reasoning (System 2), coordinated by a metacognitive arbitrator that switches on uncertainty and task novelty.</li>
     <li>Designing a meta-learning loop for agents to self-assess performance, rehearse skills, and prioritize learning by utility, frequency, and confidence decay.</li>
-    <li>Running simulation experiments in the SAPIEN simulator across ~5 environmental variation levels, 8 appliance types, and 12 multi-step tasks, tracking Forward Transfer Efficiency, Catastrophic Forgetting Index, and Autonomy Index.</li>
+    <li>Running simulation experiments in the SAPIEN simulator across 5 environmental variation levels, 8 appliance types, and 12 multi-step tasks, tracking Forward Transfer Efficiency, Catastrophic Forgetting Index, and Autonomy Index.</li>
   </ul>
 </div>
 
@@ -142,28 +166,15 @@ author_profile: true
 <div id="awards" class="section">
   <h1>Awards</h1>
 
-  <h2>Computer Science Research</h2>
   <ul>
     <li><strong>1st Place</strong> — Delaware Valley Science Fair (DVSF), Computer Science Research | 2025</li>
     <li><strong>1st Place</strong> — Montgomery County Science Research Competition (MCSRC), Computer Science Research | 2025</li>
     <li><strong>1st Place</strong> — Pennsylvania Junior Academy of Science (PJAS), Region 1B Computer Science Research | 2025</li>
     <li><strong>Villanova University Award</strong> for Computer Science Research | 2025</li>
-  </ul>
-
-  <hr class="section-divider">
-
-  <h2>Engineering &amp; Physics</h2>
-  <ul>
     <li><strong>1st Place</strong> — Pennsylvania Junior Academy of Science (PJAS), Region 1B Engineering Research | 2024</li>
     <li><strong>U.S. Air Force Special Award</strong> — "For An Outstanding Science or Engineering Project" | 2024</li>
     <li><strong>Excellence in AP Physics C</strong> — Germantown Academy | 2025</li>
     <li><strong>Greatest Perseverance in Math and Physics</strong> — Germantown Academy | 2025</li>
-  </ul>
-
-  <hr class="section-divider">
-
-  <h2>General</h2>
-  <ul>
     <li><strong>National Merit Special Corporate Scholarship</strong> | 2025</li>
   </ul>
 </div>
@@ -373,7 +384,7 @@ author_profile: true
   <p><strong>Location:</strong> Atlanta, GA</p>
   <p><strong>Phone:</strong> <a href="tel:+12679035103">+1 (267) 903-5103</a></p>
   <p><strong>GT Email:</strong> <a href="mailto:asood74@gatech.edu">asood74@gatech.edu</a></p>
-  <p><strong>Personal Email:</strong> <a href="mailto:yourpersonalemail@example.com">[PLACEHOLDER — yourpersonalemail@example.com]</a></p>
+  <p><strong>Personal Email:</strong> <a href="mailto:yourpersonalemail@example.com">[arjunsood2025@gmail.com]</a></p>
   <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/arjun-sood-0a0a38285/">linkedin.com/in/arjun-sood</a></p>
   <p><strong>GitHub:</strong> <a href="https://github.com/arjunsood2025">github.com/arjunsood2025</a></p>
 </div>

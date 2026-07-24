@@ -1,12 +1,10 @@
 main:
   - title: "About"
     url: /#about
+  - title: "Coursework"
+    url: /#coursework
   - title: "Experiences"
     url: /#experiences
-  - title: "Activities"
-    url: /#activities
-  - title: "Awards"
-    url: /#awards
   - title: "Project Portfolio"
     url: /#projects
   - title: "Skills"
