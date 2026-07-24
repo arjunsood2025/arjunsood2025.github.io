@@ -1,8 +1,6 @@
 main:
   - title: "About"
     url: /#about
-  - title: "Coursework"
-    url: /#coursework
   - title: "Experiences"
     url: /#experiences
   - title: "Project Portfolio"
@@ -11,5 +9,7 @@ main:
     url: /#skills
   - title: "Resume"
     url: /#resume
+  - title: "Coursework"
+    url: /#coursework
   - title: "Contact Me"
     url: /#contact
