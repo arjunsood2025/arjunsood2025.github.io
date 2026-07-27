@@ -19,6 +19,22 @@ author_profile: true
 
   /* Role subtitle line under each heading */
   .meta { color: #666; margin-top: -0.4em; }
+
+  /* Project figures */
+  .project-figure { margin: 1.75em 0; }
+  .project-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .project-figure figcaption {
+    color: #666;
+    font-size: 0.85em;
+    line-height: 1.5;
+    margin-top: 0.6em;
+  }
 </style>
 
 <!-- =============================================
@@ -172,7 +188,12 @@ author_profile: true
     <li>Engineered a vLLM-style inference engine: paged KV cache with chained-hash prefix caching and copy-on-write (<strong>170 concurrent sequences vs. 32 for contiguous KV, 5.3×</strong>), continuous batching with recompute preemption, speculative decoding (53% draft acceptance, 3.09 output tokens per target forward at k=4), int8 weight-only quantization, and an SSE streaming server benchmarked under open-loop Poisson load.</li>
     <li>Pinned correctness with 65+ CPU-only tests in CI: engine-greedy ≡ reference generate, paged attention ≡ dense SDPA on shuffled blocks, preemption cannot change output, KV-cache decode ≡ full forward, and DPO loss against hand-computed values.</li>
   </ul>
-  <a href="https://github.com/arjunsood2025/llm-platform-project" class="btn btn--primary">GitHub Repo</a>
+  <figure class="project-figure">
+    <img src="/assets/images/projects/llm-latency.png"
+         alt="Two log-scale line charts of serving latency versus Poisson request rate on a single RTX 5070. Left panel: time to first token, p50 rising from about 100 ms at 1 request/sec to about 5,000 ms at 8 requests/sec, with p99 rising from about 900 ms to about 40,000 ms. Right panel: inter-token latency showing the same saturation pattern. Both p99 curves flatten between 2 and 4 requests/sec before climbing steeply.">
+    <figcaption>Serving latency under open-loop Poisson load (125M model, single RTX 5070). The p99 curves flatten between 2 and 4 req/s and climb steeply after — the saturation knee that determines how much load the engine can actually absorb.</figcaption>
+  </figure>
+  <a href="https://github.com/arjunsood2025/llm-platform-project" class="btn btn--primary">Full Project Report (GitHub Repo)</a>
 
   <hr class="section-divider">
 
@@ -186,7 +207,12 @@ author_profile: true
     <li>Shipped the production layer: a Tokio host with a single-owner event loop, group commit that batches an entire event-loop drain into one fsync, and exactly-once client sessions via replicated dedup (at-least-once delivery plus idempotent apply). Holding the workload fixed at 100% read, the price of consistency is <strong>stale 13,517 / lease 13,057 / linearizable 9,043 ops/s</strong> — linearizable reads cost ~1.5× for the ReadIndex quorum round-trip.</li>
     <li>Measured failure behavior honestly: over 10 consecutive leader kills under a 32-connection load, client-observed failover ran a median of 2,141 ms — a sub-second election dominated by leader <em>rediscovery</em> — with <strong>0 of 300,000 operations lost</strong> and full throughput restored ~3.5 s after the kill.</li>
   </ul>
-  <a href="https://github.com/arjunsood2025/raft-kv-engine-project" class="btn btn--primary">GitHub Repo</a>
+  <figure class="project-figure">
+    <img src="/assets/images/projects/raft-failover.png"
+         alt="Line chart of cluster throughput in operations per second over 19 seconds, titled 'Failover under load — 0 of 300,000 ops lost'. Throughput holds near 16,000 ops/sec until the leader is killed at about 8.5 seconds, drops to zero for roughly two seconds while the cluster elects a new leader and clients re-route, then recovers to about 18,000 ops/sec by 12 seconds.">
+    <figcaption>Throughput across a <code>kill -9</code> on the leader under a 32-connection load. Roughly two seconds at zero — a sub-second election plus client rediscovery — then full recovery, with zero of 300,000 operations lost; writes caught mid-handover were delayed, not dropped.</figcaption>
+  </figure>
+  <a href="https://github.com/arjunsood2025/raft-kv-engine-project" class="btn btn--primary">Full Project Report (GitHub Repo)</a>
 
   <hr class="section-divider">
 
@@ -200,7 +226,12 @@ author_profile: true
     <li>Made leakage a failing test rather than a promise: the prefix property (features computed on truncated history must be identical to the same rows on full history) is checked mechanically, the detector is itself tested against a deliberately leaky feature, and walk-forward and purged K-fold splits are verified for overlap, ordering, and purge-gap correctness.</li>
     <li>Reported every metric after costs with a stationary-bootstrap confidence interval — there is no gross-PnL code path — with the Streamlit dashboard leading on a "CI contains 0" warning when no edge is demonstrated. Shipped alongside a FastAPI service whose time-machine endpoint reconstructs the L2 book at any historical microsecond, a SQLite run registry, 55 tests, CI, and multi-stage Docker builds.</li>
   </ul>
-  <a href="https://github.com/arjunsood2025/quant-research-platform-project" class="btn btn--primary">GitHub Repo</a>
+  <figure class="project-figure">
+    <img src="/assets/images/projects/quant-architecture.png"
+         alt="System architecture diagram titled 'quantlab — Research and Backtesting Architecture', flowing market data through replay, research, experiments, and delivery. A Binance WebSocket feed and a synthetic simulator feed an ingestion stage that normalizes schema and detects gaps, writing to a partitioned Parquet store queried by a DuckDB SQL layer. Below, a deterministic replay engine converts market events to L2 order-book state with a C++ pybind11 core and a Python reference backend producing bit-identical output. Its output flows to features, a backtester modeling fills, queue position, latency and fees, and a validation stage doing walk-forward, purge, bootstrap CIs and leakage checks, then into an experiment runner with a SQLite registry that serves a FastAPI service and a Streamlit dashboard.">
+    <figcaption>The platform end to end. The replay engine ships two independent implementations — a C++ core and a readable Python reference — whose bit-identical output is asserted in CI, so a bug has to appear in both to slip through.</figcaption>
+  </figure>
+  <a href="https://github.com/arjunsood2025/quant-research-platform-project" class="btn btn--primary">Full Project Report (GitHub Repo)</a>
 
   <hr class="section-divider">
 
@@ -214,7 +245,12 @@ author_profile: true
     <li>Surfaced what headline metrics hide: regime slicing showed the 0.899 volatility AUC is almost entirely regime detection, collapsing to 0.281–0.551 within regimes (below chance where 99% accuracy comes from predicting the majority class), and a transaction-cost sweep put Sharpe crossing zero at ~0.14 bps per trade — no tradable edge, stated plainly.</li>
     <li>Identified that the project's own baseline comparison was invalid — 5-fold walk-forward scored against a single held-out split, which made logistic regression appear to beat the transformer (0.769 vs. 0.738) purely on easier earlier folds — and built a matched-split harness on which logistic ties the transformer at 0.738 AUC over 29,774 identical test windows. Deployed through a versioned registry with atomic promotion and a FastAPI + Prometheus service at <strong>1.9 ms p50 single-window CPU latency and 2,774 windows/s peak throughput</strong> at batch 64; 43 pytest tests cover data, models, evaluation, and API.</li>
   </ul>
-  <a href="https://github.com/arjunsood2025/time-series-ml-platform-project" class="btn btn--primary">GitHub Repo</a>
+  <figure class="project-figure">
+    <img src="/assets/images/projects/tsml-results.png"
+         alt="Four-panel evaluation figure on the held-out purged test split of 29,774 windows. Top left: grouped bar chart of direction AUC by model and horizon, where logistic regression, GBDT, transformer and TCN all cluster near 0.72 to 0.75, well above the 0.50 chance line, with GBDT falling to about 0.67 at the 30-second and 60-second horizons. Top right: Sharpe versus transaction cost, falling steeply from about +236 at zero cost and crossing zero at approximately 0.14 basis points per trade. Bottom left: Spearman information coefficient rising with forward horizon from 0.13 at one second to a peak of 0.42 at 120 seconds. Bottom right: calibration curves for all five tasks sitting above the perfect-calibration diagonal, indicating under-confidence.">
+    <figcaption>Evaluation on the held-out purged split. Logistic regression ties both deep models on every direction horizon, the signal's Sharpe crosses zero at roughly 0.14 bps per trade, and the reliability curves sit above the diagonal — the model is under-confident, which matters because positions are sized from those probabilities.</figcaption>
+  </figure>
+  <a href="https://github.com/arjunsood2025/time-series-ml-platform-project" class="btn btn--primary">Full Project Report (GitHub Repo)</a>
 </div>
 
 <hr class="section-divider">
