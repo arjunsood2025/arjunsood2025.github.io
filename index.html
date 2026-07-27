@@ -162,81 +162,59 @@ author_profile: true
 <div id="projects" class="section">
   <h1>Project Portfolio</h1>
 
-  <h2>Language-Conditioned Vision-Language-Action Robot Manipulation</h2>
-  <p><strong>Technologies:</strong> PyTorch, Hugging Face LeRobot, OpenVLA, SmolVLA, ACT, LoRA/QLoRA, SO-101 arm, WebSockets, msgpack</p>
-  <p>An end-to-end language-conditioned Vision-Language-Action manipulation system spanning teleoperated data collection, dataset curation, policy training, real-time control, and evaluation on a physical robot arm.</p>
+  <h2>LLM Platform — Pretraining, Post-Training, and a From-Scratch Inference Engine</h2>
+  <p class="meta"><strong>Technologies:</strong> Python, PyTorch, Triton, DDP/FSDP2, DPO, lm-eval-harness, FastAPI, Prometheus, Docker</p>
+  <p>The three systems every modern LLM lab runs — <strong>pretraining, post-training, and high-performance serving</strong> — built with no model, trainer, or serving frameworks. Every layer is in the repo: a byte-level BPE tokenizer, a LLaMA-style decoder-only transformer (RMSNorm, SwiGLU, RoPE, GQA, tied embeddings), the distributed training loop, the DPO loss, and a mini-vLLM inference engine. A 125M-parameter model was trained on 1.26B tokens at <strong>42.7% MFU on a single RTX 5070</strong> with bitwise-deterministic checkpoint resume.</p>
   <ul>
-    <li>Trained and benchmarked a four-model ladder — from-scratch behavior cloning, ACT, SmolVLA, and a LoRA/QLoRA fine-tune of the 7B-parameter OpenVLA — on 800 demonstrations across 8 tabletop tasks, improving held-out success from 34% to 76%.</li>
-    <li>Designed a reproducible evaluation suite (Wilson 95% CIs over 20 trials/condition) measuring paraphrase generalization, unseen-position and distractor robustness, and inference latency across 640 held-out trials.</li>
-    <li>Engineered an async policy-inference server and 30 Hz robot client with a hard safety filter — joint/velocity clamps, forward-kinematics workspace bounds, gripper-current cap, and e-stop — enforcing zero unsafe motor commands.</li>
-    <li>Delivered a reproducible research stack: fixed seeds, version-controlled YAML configs, Hub-versioned datasets, 47 hardware-free tests covering the full control loop, and a paper-style report with ablations and failure analysis.</li>
+    <li>Wrote two custom Triton kernels — fused RMSNorm and fused cross-entropy with online logsumexp — each with a PyTorch-reference correctness test and a microbenchmark, alongside a streaming data pipeline with MinHash deduplication and n-gram contamination filtering over memory-mapped shards.</li>
+    <li>Ran a 7-run scaling study across a size × token grid (10M/30M/85M), fitting the compute–loss power law <em>L = E + A·C<sup>−α</sup></em> at α = 0.195 with a Chinchilla joint fit of β<sub>D</sub> = 0.323 (against the paper's 0.28), plus matched-compute architecture ablations of RoPE, SwiGLU, and GQA.</li>
+    <li>Post-trained with SFT (loss masking, sequence packing; 30k conversations) and a from-scratch DPO implementation (4k preference pairs, 58% preference accuracy, KL ≈ 0.10), evaluated via lm-eval-harness and a position-debiased LLM judge with bootstrap CIs — which slightly preferred the SFT model (DPO win-rate 43.8% [37.5, 48.8]), reported as measured rather than hidden.</li>
+    <li>Engineered a vLLM-style inference engine: paged KV cache with chained-hash prefix caching and copy-on-write (<strong>170 concurrent sequences vs. 32 for contiguous KV, 5.3×</strong>), continuous batching with recompute preemption, speculative decoding (53% draft acceptance, 3.09 output tokens per target forward at k=4), int8 weight-only quantization, and an SSE streaming server benchmarked under open-loop Poisson load.</li>
+    <li>Pinned correctness with 65+ CPU-only tests in CI: engine-greedy ≡ reference generate, paged attention ≡ dense SDPA on shuffled blocks, preemption cannot change output, KV-cache decode ≡ full forward, and DPO loss against hand-computed values.</li>
   </ul>
-  <a href="https://github.com/arjunsood2025" class="btn btn--primary">GitHub Repo</a>
+  <a href="https://github.com/arjunsood2025/llm-platform-project" class="btn btn--primary">GitHub Repo</a>
 
   <hr class="section-divider">
 
-  <h2>Reinforcement Learning for Robust Quadruped Locomotion</h2>
-  <p><strong>Technologies:</strong> NVIDIA Isaac Lab, PPO, PyTorch, CNNs, ROS 2, C++ libtorch, TorchScript, ONNX</p>
-  <p>Robust sim-to-real locomotion policies for the Unitree Go2, trained with PPO across 4,096 GPU-parallel environments using a 17-term shaped reward, a procedural terrain curriculum, and full domain randomization over mass, friction, motor strength, sensor noise, and actuation latency.</p>
+  <h2>Raft-Replicated Key-Value Store with a From-Scratch LSM Engine</h2>
+  <p class="meta"><strong>Technologies:</strong> Rust, Tokio, Raft Consensus, LSM Trees, Deterministic Simulation Testing, serde/bincode</p>
+  <p>A linearizable, replicated key-value database built from scratch in Rust — storage engine, consensus, networking, and the test infrastructure to prove it correct. No database crates, no consensus crates, no RPC frameworks; the dependency list is <code>tokio</code>, <code>serde</code>/<code>bincode</code>, and <code>crc32fast</code>. An LSM-tree engine (CRC-framed WAL with torn-write recovery, bloom-filtered SSTables, leveled compaction, MVCC snapshots) sits beneath a <strong>sans-IO</strong> Raft core with pre-vote elections, pipelined replication, InstallSnapshot, membership changes, and ReadIndex.</p>
   <ul>
-    <li>Built an end-to-end vision-based controller: 64×64 egocentric depth images encoded by a custom CNN and fused with proprioception in an asymmetric actor-critic, traversing stairs, slopes, and gaps without privileged height maps.</li>
-    <li>Engineered an evaluation harness over 100-episode suites measuring success/fall rate, velocity-tracking error, cost of transport, and push recovery; improved rough-terrain success from 62% → 89%.</li>
-    <li>Validated every reward and randomization component via controlled ablations (fixed-seed retraining per term), documenting failure modes such as foot-skating, twitching, and high-torque gaits.</li>
-    <li>Exported policies to TorchScript/ONNX with numerical parity verification and shipped a ROS 2 inference node plus a C++ libtorch 50 Hz control loop with safety clamps, watchdogs, and sub-millisecond p95 latency against a 20 ms budget.</li>
+    <li>Built a FoundationDB-style deterministic simulator that runs the entire cluster — nodes, disks, network, and clients — single-threaded on virtual time from one seeded PRNG, injecting message loss, duplication, reordering, asymmetric partitions, crash-restart with loss of volatile state, and forced snapshot transfers.</li>
+    <li>Executed <strong>20,000 randomized failure schedules</strong> (≈420M simulated events, ≈17.3M client operations), asserting election safety, state-machine safety, and log matching continuously, then checking every client history with a from-scratch Wing &amp; Gong linearizability checker; each run is a pure function of its seed and replays exactly.</li>
+    <li>Found and documented <strong>8 real bugs</strong> with reproducing seeds preserved as CI regressions — the deepest a state-machine safety violation in which an InstallSnapshot covering a log <em>prefix</em> truncated a follower's acked entries and a later legitimate election overwrote a committed entry; five rare conditions had to align at one instant, and exactly one seed in 20,000 reaches it.</li>
+    <li>Shipped the production layer: a Tokio host with a single-owner event loop, group commit that batches an entire event-loop drain into one fsync, and exactly-once client sessions via replicated dedup (at-least-once delivery plus idempotent apply). Holding the workload fixed at 100% read, the price of consistency is <strong>stale 13,517 / lease 13,057 / linearizable 9,043 ops/s</strong> — linearizable reads cost ~1.5× for the ReadIndex quorum round-trip.</li>
+    <li>Measured failure behavior honestly: over 10 consecutive leader kills under a 32-connection load, client-observed failover ran a median of 2,141 ms — a sub-second election dominated by leader <em>rediscovery</em> — with <strong>0 of 300,000 operations lost</strong> and full throughput restored ~3.5 s after the kill.</li>
   </ul>
-  <a href="https://github.com/arjunsood2025" class="btn btn--primary">GitHub Repo</a>
+  <a href="https://github.com/arjunsood2025/raft-kv-engine-project" class="btn btn--primary">GitHub Repo</a>
 
   <hr class="section-divider">
 
   <h2>Quant Research Platform &amp; C++ Event-Driven Backtesting Engine</h2>
-  <p><strong>Technologies:</strong> C++20, pybind11, DuckDB, Parquet, FastAPI, Streamlit, SQLite, Docker, GitHub Actions</p>
-  <p>A market-data research platform ingesting exchange L2 order-book and trade feeds into hive-partitioned Parquet with schema validation and sequence-gap detection, with DuckDB SQL achieving 18× faster range queries than a pandas baseline via partition pruning and predicate pushdown.</p>
+  <p class="meta"><strong>Technologies:</strong> C++20, Python, pybind11, CMake, DuckDB, Parquet, FastAPI, Streamlit, SQLite, Docker, GitHub Actions</p>
+  <p>A production-style research platform for market-microstructure data: asynchronous ingestion of L2 order-book and trade feeds, hive-partitioned Parquet storage with a DuckDB SQL layer (2.5–2.9× faster analytical queries than a pandas baseline via partition pruning and predicate pushdown), a C++ limit-order-book replay engine with Python bindings, an event-driven backtester with realistic execution modeling, and a statistical validation stack built around one principle: <strong>it is easy to fool yourself with backtests, so the platform makes the honest path the default path.</strong></p>
   <ul>
-    <li>Wrote a C++20 limit-order-book replay engine with zero-copy pybind11/NumPy bindings (GIL released in the hot loop), processing 15M events/sec — 30× the pure-Python reference — with bit-identical cross-language parity enforced in CI.</li>
-    <li>Developed an event-driven backtester simulating order latency, book-walking market impact, maker/taker fees, and L2 queue-position approximation, with portfolio accounting identities verified by property-style tests.</li>
-    <li>Implemented leakage-safe evaluation: walk-forward and purged K-fold splits, train-only hyperparameter tuning, stationary-bootstrap Sharpe confidence intervals, and automated lookahead detection that fails CI on contaminated features.</li>
-    <li>Shipped production tooling around the research core: FastAPI experiment service, SQLite run registry, Streamlit dashboard, seeded synthetic market simulator, 60+ tests, CI, and multi-stage Docker builds.</li>
+    <li>Wrote a C++20 limit-order-book replay engine with zero-copy pybind11/NumPy bindings and the GIL released in the hot loop, sustaining <strong>11.5M events/sec</strong> — roughly <strong>488×</strong> the pure-Python reference — with the standalone C++ harness reaching 15.8M events/sec at p50 100 ns / p99 200 ns per <code>apply()</code>.</li>
+    <li>Enforced bit-for-bit parity between the C++ engine and a readable pure-Python reference in CI, so a bug must appear in two independent implementations to slip through; the synthetic simulator keeps its own book and tests assert the engine reconstructs that exact state from the event stream.</li>
+    <li>Developed an event-driven backtester modeling order latency, book-walking market impact, maker/taker fees, position limits, and L2 queue-position approximation, with the accounting identity <em>equity = cash + position × mid</em> and cash reconciliation against the fill log verified after every run.</li>
+    <li>Made leakage a failing test rather than a promise: the prefix property (features computed on truncated history must be identical to the same rows on full history) is checked mechanically, the detector is itself tested against a deliberately leaky feature, and walk-forward and purged K-fold splits are verified for overlap, ordering, and purge-gap correctness.</li>
+    <li>Reported every metric after costs with a stationary-bootstrap confidence interval — there is no gross-PnL code path — with the Streamlit dashboard leading on a "CI contains 0" warning when no edge is demonstrated. Shipped alongside a FastAPI service whose time-machine endpoint reconstructs the L2 book at any historical microsecond, a SQLite run registry, 55 tests, CI, and multi-stage Docker builds.</li>
   </ul>
-  <a href="https://github.com/arjunsood2025" class="btn btn--primary">GitHub Repo</a>
+  <a href="https://github.com/arjunsood2025/quant-research-platform-project" class="btn btn--primary">GitHub Repo</a>
 
   <hr class="section-divider">
 
-  <h2>Time-Series ML Platform with Distributed Training and Inference</h2>
-  <p><strong>Technologies:</strong> PyTorch, Transformers, TCNs, DDP/torchrun, FastAPI, Prometheus, pytest</p>
-  <p>A config-driven training system (Transformer + TCN with multi-horizon heads, focal loss, mixed precision, gradient accumulation, DDP, checkpointing, early stopping) for 3-class return-direction and volatility prediction on noisy simulated limit-order-book data.</p>
+  <h2>Time-Series ML Platform — Leakage-Safe Training, Evaluation, and Serving</h2>
+  <p class="meta"><strong>Technologies:</strong> PyTorch (DDP, AMP), Transformers, TCNs, scikit-learn, OmegaConf, FastAPI, Prometheus, Docker, pytest</p>
+  <p>Leakage-safe training, evaluation, and serving for short-horizon prediction on noisy, regime-switching limit-order-book data — built as a research platform, not a trading bot. The emphasis is on measuring a signal honestly rather than flattering it, and on this data the honest answer is that <strong>the signal does not survive transaction costs, and a logistic regression matches the transformer.</strong> Both findings are reported up front rather than buried.</p>
   <ul>
-    <li>Engineered a causal microstructure feature store (order-flow imbalance, book imbalance, realized volatility, rolling z-scores) with machine-checked no-lookahead guarantees via a truncation-invariance test.</li>
-    <li>Designed a leakage-safe evaluation suite — purged/embargoed walk-forward splits, shuffled-label sanity tests, regime-sliced metrics, calibration error, and transaction-cost stress tests reporting where the signal's Sharpe crosses zero.</li>
-    <li>Benchmarked deep models against logistic-regression, GBDT, and naive-rule baselines across 4 market regimes; causality unit tests caught a real bug where TCN normalization leaked future information across the time axis.</li>
-    <li>Deployed a versioned model registry with atomic promotion behind a FastAPI service with Prometheus histograms, measuring ~1.5 ms p50 single-window CPU latency and ~4.1k windows/s batch throughput; 43 pytest tests cover data, models, evaluation, and API.</li>
+    <li>Built a config-driven training system — Transformer encoder and TCN with multi-horizon heads, focal loss with class weighting, mixed precision, gradient accumulation, cosine schedule with warmup, checkpointing, early stopping, and DDP via <code>torchrun</code> — predicting 3-class midprice direction at 1/5/30/60s horizons plus a forward realized-volatility bucket from 41 causal microstructure features.</li>
+    <li>Enforced no-lookahead by machine check: truncation invariance (features recomputed on data cut at time <em>t</em> are bit-identical for rows ≤ <em>t</em>), shuffled-label retraining that must collapse to the majority-class rate, a purge equal to the maximum 60s label horizon plus a 60s embargo, and scaler and volatility-bucket edges fit on training rows only.</li>
+    <li>Defended causality at the architecture level, not just in the data: the TCN normalizes per timestep rather than with GroupNorm/BatchNorm, which pool statistics across the length axis of an <em>(N, C, L)</em> tensor and would leak future into past through the normalization layer alone — a leak no amount of careful splitting would catch — with a receptive-field test asserting the output at step <em>t</em> is unchanged when every input after <em>t</em> is overwritten.</li>
+    <li>Surfaced what headline metrics hide: regime slicing showed the 0.899 volatility AUC is almost entirely regime detection, collapsing to 0.281–0.551 within regimes (below chance where 99% accuracy comes from predicting the majority class), and a transaction-cost sweep put Sharpe crossing zero at ~0.14 bps per trade — no tradable edge, stated plainly.</li>
+    <li>Identified that the project's own baseline comparison was invalid — 5-fold walk-forward scored against a single held-out split, which made logistic regression appear to beat the transformer (0.769 vs. 0.738) purely on easier earlier folds — and built a matched-split harness on which logistic ties the transformer at 0.738 AUC over 29,774 identical test windows. Deployed through a versioned registry with atomic promotion and a FastAPI + Prometheus service at <strong>1.9 ms p50 single-window CPU latency and 2,774 windows/s peak throughput</strong> at batch 64; 43 pytest tests cover data, models, evaluation, and API.</li>
   </ul>
-  <a href="https://github.com/arjunsood2025" class="btn btn--primary">GitHub Repo</a>
-
-  <hr class="section-divider">
-
-  <h2>LLM Pretraining, Post-Training, and High-Performance Inference Engine</h2>
-  <p><strong>Technologies:</strong> PyTorch, Triton, FSDP2/DDP, DPO, lm-eval-harness, CUDA/A100, Docker</p>
-  <p>An end-to-end LLM platform: a from-scratch BPE tokenizer, a LLaMA-style transformer (RoPE/GQA/SwiGLU), and distributed pretraining of 125M-parameter models on 2.5B tokens with bf16 and custom Triton kernels, reaching 36% MFU on A100s with bitwise-deterministic checkpoint resume.</p>
-  <ul>
-    <li>Ran a 9-run scaling study fitting compute–loss power laws against Chinchilla predictions, with matched-compute architecture ablations (RoPE, SwiGLU, GQA) and a MinHash-deduped, contamination-filtered data pipeline over memory-mapped shards.</li>
-    <li>Post-trained via SFT (loss masking, sequence packing) and a from-scratch DPO implementation, evaluated with lm-eval-harness (HellaSwag, ARC, PIQA, WinoGrande, MMLU) and position-debiased LLM-judge win rates with bootstrap CIs.</li>
-    <li>Engineered a vLLM-style inference engine: paged KV cache with prefix caching and copy-on-write, continuous batching with preemption, speculative decoding (1.8× decode speedup at 72% acceptance), and int8 weight-only quantization — serving 18,000 tok/s at 42 ms p99 TTFT under Poisson load.</li>
-    <li>Shipped with 65+ CI unit tests (logit parity, paged-vs-dense attention equivalence, kernel correctness), Docker packaging, a model card, and a benchmark report against Hugging Face and vLLM baselines.</li>
-  </ul>
-  <a href="https://github.com/arjunsood2025" class="btn btn--primary">GitHub Repo</a>
-
-  <hr class="section-divider">
-
-  <h2>Raft-Replicated Key-Value Store with From-Scratch LSM Engine</h2>
-  <p><strong>Technologies:</strong> Rust, Tokio, Raft, LSM Trees, Deterministic Simulation Testing</p>
-  <p>A linearizable distributed KV database built from scratch with no database, consensus, or RPC libraries: an LSM-tree storage engine (CRC-framed WAL with torn-write recovery, bloom-filtered SSTables, leveled compaction, MVCC snapshots) under a full Raft implementation with pre-vote elections, pipelined replication, InstallSnapshot, membership changes, and ReadIndex.</p>
-  <ul>
-    <li>Engineered a FoundationDB-style deterministic simulator running the entire cluster on virtual time with seeded fault injection and exact seed replay — executing 11,000+ failure schedules (~230M events) against a from-scratch Wing-Gong linearizability checker.</li>
-    <li>Caught and documented 6 real bugs pre-release with reproducing seeds preserved as CI regressions, including a snapshot-transfer wedge requiring four rare failures to align — invisible to unit tests and live chaos testing alike.</li>
-    <li>Shipped the production layer: a Tokio server with a single-owner event loop, group commit (3.4× write throughput), exactly-once client sessions via replicated dedup, and three read-consistency modes at 0.55 / 0.94 / 10 ms p50 on a 3-node cluster.</li>
-    <li>Measured failure behavior honestly: sub-second leader election under 300,000-op load with zero lost operations, with client-observed failover decomposed into election vs. rediscovery via a purpose-built YCSB-style benchmark suite.</li>
-  </ul>
-  <a href="https://github.com/arjunsood2025" class="btn btn--primary">GitHub Repo</a>
+  <a href="https://github.com/arjunsood2025/time-series-ml-platform-project" class="btn btn--primary">GitHub Repo</a>
 </div>
 
 <hr class="section-divider">
