@@ -43,13 +43,13 @@ Concentrations: AI + Modeling \& Simulation | GPA 3.55/4.00
 * Researched and proposed approximately 6 techniques to make video foundational model object action detection system more computationally efficient.
 * Developed a prompting interface with approximately 6 configurable input and control elements for machine learning engineers to guide video foundational model in training with HTML, CSS, React JS, and Figma.
 
-### Drive Engineering — Lansdale, PA
+### VHB — Lansdale, PA
 
 **Traffic Engineering and Web Development Intern** — *April 2024 – May 2024*
 
 * Reoptimized traffic light timing systems by modeling and simulating approximately 4 intersections in Synchro 11.
 * Improved highway monitoring systems by repositioning approximately 8 CCTV cameras for optimal coverage.
-* Enhanced Drive Engineering's website user experience by redesigning approximately 7 webpages with Wix for improved usability.
+* Enhanced VHB's website user experience by redesigning approximately 7 webpages with Wix for improved usability.
 * Facilitated communication between engineers and clients by making 10+ project reports.
 
 ## Selected Projects
