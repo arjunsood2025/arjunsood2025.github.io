@@ -1,0 +1,47 @@
+<!-- Site-specific overrides for the remote Minimal Mistakes theme.
+     Loaded after the theme stylesheet, so equal-specificity rules win. -->
+<style>
+  /* The theme collapses the author sidebar's social links behind a "Follow"
+     toggle below its $large (1024px) breakpoint. Remove the toggle and show the
+     links directly, the way they already appear on wide screens. */
+  .author__urls-wrapper button {
+    display: none;
+  }
+
+  .author__urls {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    z-index: auto;
+  }
+
+  /* Caret that pointed at the collapsed dropdown. */
+  .author__urls:before,
+  .author__urls:after {
+    display: none;
+  }
+
+  /* Below that breakpoint the sidebar is a single horizontal row (avatar,
+     name, toggle). With the links now inline, stack the row so they sit under
+     the name instead of crowding it. */
+  @media (max-width: 1023px) {
+    .author__avatar,
+    .author__content,
+    .author__urls-wrapper {
+      display: block;
+    }
+
+    .author__content {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .author__urls {
+      margin-top: 0.75em;
+    }
+  }
+</style>
